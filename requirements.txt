@@ -1,0 +1,17 @@
+scikit-learn
+jupyterlab
+folium
+pandas
+numpy
+plotly
+geojsoncontour
+polyline
+mock
+matplotlib
+scipy
+attrs
+geopandas
+joblib
+ortools
+six
+dacite

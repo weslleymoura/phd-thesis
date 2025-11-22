@@ -1,0 +1,556 @@
+%Version 3.1 December 2024
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%=========================================================================================%%
+%% the documentclass is set to pdflatex as default. You can delete it if not appropriate.  %%
+%%=========================================================================================%%
+
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove Numbered in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-chicago.bst%  
+ 
+%%\documentclass[pdflatex,sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+%%\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
+%%\documentclass[pdflatex,sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[pdflatex,sn-vancouver-num]{sn-jnl}% Vancouver Numbered Reference Style
+%%\documentclass[pdflatex,sn-vancouver-ay]{sn-jnl}% Vancouver Author Year Reference Style
+%%\documentclass[pdflatex,sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[pdflatex,sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+
+\documentclass[pdflatex,sn-mathphys-num,iicol]{sn-jnl}% Math and Physical Sciences Numbered Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Article Title]{Reducing the vehicle routing problem complexity by mapping and sequencing clusters of high-density deliveries in urban regions}
+
+%%=============================================================%%
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+%%  \sfx{IV}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author*[1]{\fnm{Weslley} \sur{Moura}}\email{weslleymoura@gmail.com} 
+
+\author[2]{\fnm{António} \sur{Grilo}}\email{acbg@fct.unl.pt}
+\equalcont{These authors contributed equally to this work.}
+
+\author[1]{\fnm{Paulo} \sur{Novais}}\email{pjon@di.uminho.pt}
+\equalcont{These authors contributed equally to this work.}
+
+\affil[1]{\orgdiv{ALGORITMI Center/LASI}, \orgname{University of Minho}, \state{Braga}, \country{Portugal}}
+
+\affil[2]{\orgdiv{UNIDEMI/LASI}, \orgname{Universidade NOVA de Lisboa}, \state{Caparica}, \country{Portugal}}
+
+%%==================================%%
+%% Sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{In urban logistics, a massive number of parcels need to be delivered on a daily basis to individual customer's doors. This is known as last-mile delivery, and logistics companies commonly use Vehicle Routing Problem (VRP) solutions to create intelligent route plans to support the execution of their work. Route planning can be optimized for different cost functions, such as cost-based optimization, time-based optimization, CO2 emission optimization, service-level optimization, workload-balancing optimization, and more. In this work, we propose a Kernel Density Estimation (KDE) task on past deliveries to identify central and peripheral areas. Then, a density-based clustering method is used to segment dense delivery regions within peripheral areas. These dense regions are further sequenced in order to simplify the VRP optimization space. The method was tested on real-world datasets containing thousands of deliveries from some of the largest Brazilian cities, and initial results suggest a transportation cost reduction of around 7 percent compared to other traditional user demand segmentation methods.}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+% \abstract{\textbf{Purpose:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Methods:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Results:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
+
+\keywords{Density-Based Clustering, Kernel Density Estimation, Vehicle Route Problem, Last Mile Urban Logistics}
+
+%%\pacs[JEL Classification]{D8, H51}
+
+%%\pacs[MSC Classification]{35A01, 65L10, 65L12, 65L20, 65L70}
+
+\maketitle
+
+\section{Introduction}
+
+Urban logistics focuses on the design, implementation, and operation of systems that enable the movement of goods within urban areas, commonly supported by a fleet of vehicles. The rise of e-commerce has made fast, timely, and low-cost delivery a key expectation for consumers, pushing businesses to adopt new technologies and supply chain models.
+
+An efficient route planning is a critical operation in the last-mile stage of urban logistics, as it involves grouping deliveries to nearby regions to optimize an objective function. This route planning challenge is commonly known in the literature as the Vehicle Routing Problem (VRP). 
+
+According to \cite{Toth}, a formal definition of VRP can be formulated as follows: given a set of transportation requests and a fleet of vehicles, the task consists in finding a set of routes to execute all the transportation requests using the available fleet of vehicles, at minimum cost. More specifically, the task consists in defining which transportation request will be attended by which vehicle route and in which order, so that a feasible route can be executed.  
+
+VRP includes variants like the Capacitated VRP (CVRP) and its stochastic and dynamic counterpart (SD-CVRP), which handles real-time package assignments as they become available \cite{Lagorio}.
+
+This work addresses the SD-CVRP within the last-mile context, investigating the use of clustering techniques and kernel density estimation (KDE) to enhance VRP solutions.
+
+In \cite{Moura}, we previously described an initial version of the proposed method for this research, segmenting the VRP optimization space into central and peripheral regions. Although the method proposed in \cite{Moura} achieved a transportation cost reduction of approximately 3 percent (using real-world datasets from \cite{Loggi}), it still presents significant challenges in generating efficient routes in peripheral regions, which are often sparse and result in zigzag vehicle movements.
+
+We now propose a significant enhancement to \cite{Moura}, introducing DBSCAN to segment the peripheral area into multiple sub-regions, and then sequencing these sub-regions to facilitate vehicle allocation.
+
+This work also provides additional insights about an alternative clustering technique, using polar coordinates, to segment the peripheral regions based on the spatial distribution of customer demands, leveraging angular and radial patterns to create more manageable clusters that reflect real-world city layouts. 
+
+\subsection{Pruning the optimization space of VRP solutions}
+
+Clustering techniques are commonly used to optimize the search space of VRP solutions during creation of smart routes. Instead of solving the VRP over the entire set of delivery points as a single large-scale optimization problem, clustering allows the problem to be decomposed into smaller, more manageable subproblems. By grouping nearby delivery points, each cluster can be assigned to a vehicle or sub-route, which reduces the computational complexity of the routing process.
+
+In addition to this scalability concerns, clustering the VRP optimization space can also enhance the quality of the routes by preserving local spatial coherence, which often translates into shorter travel distances and better route compactness.
+
+In recent years, significant advances have been made in clustering algorithms applied to VRPs. For example, \cite{Wang2025-April} proposed a multi-stage spatio-temporal clustering method for routing autonomous delivery robots (ADRs) in complex urban environments, including multi-floor buildings. Their approach models delivery points in 3D space and time, using Ant Colony Optimization with temporal pheromone updates to minimize route overlap and travel time. This method significantly improves route efficiency in dense, vertical logistics networks.
+
+Other approaches focus on density-based clustering. \cite{Kim2025-May} introduced DBSCAN-Plus, a refined version of DBSCAN combined with micro-cluster fusion, to segment delivery points in heterogeneous fleet VRPs with time windows. This pre-processing step feeds an improved Ant Colony Optimization algorithm, resulting in better route balance and lower emissions. 
+
+Several other recent studies on clustering for VRP solutions include \cite{Barros,Martins,Nguyen, Alonso, Chakraborty2022}. These studies, combined with the continued growth in VRP-related publications \cite{Zhou}, highlights the strong interest in this field by the urban logistics industry, as well as the continuous research development devoted to clustering algorithms for VRP.
+
+\section{Research methodology}
+
+In this work, we are using Loggi Benchmark for Urban Deliveries, or LoggiBUD for short \cite{Loggi}. LoggiBUD was created to bridge the gap between academic research and real-world urban logistics by providing large-scale, realistic datasets for last-mile delivery problems. Unlike synthetic benchmarks that rely on abstract city models or probabilistic assumptions, LoggiBUD offers real delivery data—including street networks, travel distances, and historical delivery records—captured from operations in major Brazilian cities. Its core motivation is to enable reproducible and scalable VRP research of real urban environments.
+
+Although LoggiBUD is a relatively new set of datasets, several papers have already been published using it, covering topics such as clustering-based routing and region segmentation \cite{Costa2022-LoggiBUD,Macrina2023-LoggiBUD,ClementinoJuly2023-LoggiBUD}, robust and stochastic VRP optimization \cite{Rezaei2024-LoggiBUD,Rezaei2023-LoggiBUD}, real-time dynamic parcel allocation \cite{Clementino2023-LoggiBUD}, large-scale route optimization \cite{Cavalcante2023-LoggiBUD}, comparative performance analyses across Brazilian regions \cite{ClementinoOctober2022-LoggiBUD}, and consolidation hub placement \cite{BeaMendon2023-LoggiBUD}.
+
+In terms of data, there are two types of datasets, training and testing. In this work, training datasets are used during the offline phase to create macro regions and apply density segmentation (for the proposed method). Testing datasets are used during the online phase for evaluating VRP solutions. In this phase, no training occurs; instead, the system dynamically allocates parcels to vehicles, simulating real-time operations. 
+
+In LoggiBUD, each instance represents a vehicle's travel execution, during which multiple parcels are delivered. In this research, we used the data set from a Brazilian state called Pará, which contains 273 historical travel instances and covers 892k parcel deliveries. The dataset is publicly available at \cite{Loggi}.
+
+\section{Proposed method}
+
+To deliver hundreds of thousands of parcels daily, urban logistics companies often segment parcels by regions or clusters—such as zip codes, cities, or manually defined areas—to simplify their vehicle routing problem (VRP). A key goal of this segmentation is to maximize delivery density, enabling vehicles to be fully loaded and complete shorter routes, thus improving cost efficiency by reducing travel distances and optimizing fleet usage.
+
+While some companies may prioritize other objectives like delivery time, this research focuses on cost optimization, specifically minimizing total travel distance (in kilometers) as a proxy for cost. Other constraints—such as service levels, vehicle availability, and working hours—remain important but secondary to this focus.
+
+Clustering is a common technique to reduce the VRP’s search space, allowing routing algorithms to create feasible and efficient routes within smaller, dense delivery regions. This study is framed by three main points: optimizing cost through route distance reduction, using travel distance as the objective function, and focusing on clustering based on delivery density.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-1}
+  \caption{Presenting an overview of the proposed method}
+\end{figure}
+
+Figure 1 reveals the proposed method of this work, which will be deeply explained in future sections. In summary, we are exploring two particular tasks: 1) enhancing the macro segmentation of traditional VRP solutions by applying a kernel density estimation and creating density-based micro regions; and 2) sequencing these micro regions, based on their proximity, to support the vehicle allocation process. Unlike \cite{Moura}, this proposal adds an extra layer of segmentation on peripheral regions and simplifies buffering implementation through sequenced micro regions. 
+
+\subsection{The baseline method used for comparison}
+
+The baseline method - which this work intends to improve - is provided by \cite{Loggi}, in a set of algorithms that support the base operations of a route planning. The vehicle allocation process of the baseline method consists in an offline phase, where a clustering algorithm is trained on top of past deliveries to identify delivery regions in the map; and an online phase, where each delivery is allocated into a vehicle and the route is created.
+
+The offline phase of the baseline method consists in:
+
+\begin{enumerate}
+  \item K-Means algorithm is trained on top of past deliveries to identify delivery regions in the map
+\end{enumerate}
+
+The online phase of the baseline method consists in:
+
+\begin{enumerate}
+  \item Pre-allocate one vehicle per cluster
+  \item For each new parcel available for delivery:
+  \begin{enumerate}
+    \item Predict the cluster of the new parcel (using the pre-trained clustering model)
+    \item Check if the vehicle associated within that cluster is full
+    \begin{enumerate}
+        \item If vehicle is not full, allocate the new parcel in the vehicle and process the next parcel (return to step 2)
+        \item If vehicle is full
+        \begin{enumerate}
+            \item Close the current vehicle and create the travel plan (optimized route using a VRP solver). Start delivering parcels, according to the travel plan
+            \item Open a new vehicle in that cluster 
+            \item Allocate the new parcel 
+            \item Process the next parcel (return to step 2)
+        \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  \item When there is no other parcel to delivery
+  \begin{enumerate}
+    \item Close all the existing vehicles waiting for more parcel allocation
+    \item Create all remaining travel plans (routes) with the remaining deliveries. Start delivering parcels, according to the travel plans
+  \end{enumerate}
+\end{enumerate}
+
+By the end of all vehicles execution, all the parcels will be delivered and the travel distance metric can be calculated.
+
+\subsection{The proposed method}
+
+The proposed method also consists in two phases: offline and online. The same rationale from the baseline method is applicable for the proposed method, where the offline phase is used to map the delivery region, and the online phase is used to execute the vehicle allocation process. This approach provides significant improvements on \cite{Moura}'s approach, since we are now proposing a clustering solution to optimize VRP on peripheral regions. This optimization is mainly performed in the offline phase of the method, where these sub-regions are identified and sequenced. 
+
+\subsubsection{Offline phase: density classification of the delivery region (macro region)}
+
+The method proposed in this work assumes that the regions created in the baseline method can be further divided into sub-regions, based on their density information. In real life, these sub-regions tend to represent urban centers (with more concentration of requests) and peripheral areas (with more sparse requests). 
+The offline phase of the proposed method consists in:
+
+\begin{enumerate}
+  \item K-Means algorithm is trained on top of past deliveries to identify delivery regions in the map (no change, this is part of the baseline method)
+  \item A Kernel Density Estimation is performed inside each cluster in order to map central vs peripheral region (\cite{Moura}´s proposal)
+  \item Density-based clusters are created in the peripheral region to identify denser points (enhancement proposed in this work)
+  \item Denser points are sequenced based on their proximity, and a base route will be created: from central region to all denser points in the peripheral region (enhancement proposed in this work)
+\end{enumerate}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-2}
+  \caption{Output from the offline phase of the proposed method}
+\end{figure}
+
+Assuming that the macro region shown in Figure 2 represents only one of the delivery regions defined by the subject matter expert, the proposed method will classify this macro region based on its density information, namely center area, peripheral area, denser points in the peripheral area, and a base route from the center region to each denser point.
+
+\subsubsection{Online phase: vehicle allocation process}
+
+The vehicle allocation process is known as the online phase of the baseline and proposed methods because this is the time when each parcel is dispatched for delivery to the end customer, in real time. In this context, the offline phase (executed à priori) provides all the relevant information to the real time environment (online phase) to make decisions. More specifically, the decision at this point consists in defining which vehicle will deliver the income customer request, assuming that customer requests represent a continuous stream.
+The online phase of the proposed method consists in:
+
+\begin{enumerate}
+  \item Pre-allocate one vehicle per cluster and density region
+  \item For each new parcel available for delivery:
+  \begin{enumerate}
+    \item Predict the cluster of the new parcel (using the pre-trained clustering model)
+    \item Predict the density region within the predicted cluster
+    \item Check if the vehicle associated within that cluster and density region is full
+    \begin{enumerate}
+        \item If vehicle is not full, allocate the new parcel in the vehicle and process the next parcel (return to step 2)
+        \item If vehicle is full
+        \begin{enumerate}
+            \item Close the current vehicle and create the travel plan (optimized route using a VRP solver). Start delivering parcels, according to the travel plan
+            \item Open a new vehicle in that cluster 
+            \item Allocate the new parcel 
+            \item Process the next parcel (return to step 2)
+        \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  \item When there is no other parcel to delivery
+  \begin{enumerate}
+    \item Reorganize pre-allocated vehicles as per the base route 
+    \item Close all the existing vehicles waiting for more parcel allocation
+    \item Create all remaining travel plans (routes) with the remaining deliveries. Start delivering parcels, according to the travel plans
+  \end{enumerate}
+\end{enumerate}
+
+Both baseline and proposed methods implement offline and online phases to dynamically sort all deliveries into the feet of vehicles. However, there are some key differences in both phases of the baseline and proposed methods that will be explained in the next subsections. 
+
+\subsubsection{(Offline - Task 2) A Kernel Density Estimation is performed inside each cluster in order to map central vs peripheral region}
+
+In this step, the proposed method assumes that the distribution of the parcels within the macro region is not uniform. As shown in real world scenarios \cite{Loggi}, it is common to find more customer requests in central regions, as well as less customer requests in peripheral regions. The goal of this task is to split the macro regions between center vs peripheral. This step was originally tested in \cite{Moura}.
+
+\subsubsection{(Offline - Task 3) Density-based clusters are created in the peripheral region to identify denser points}
+
+This task aims to segment the peripheral region of the macro region. It assumes that, even into the peripheral region, there might be some small center areas, thus denser than the rest of the peripheral space. In this step, a density-based clustering algorithm, namely DBSCAN, is used to identify these small center areas. 
+DBSCAN does not requires the number of clusters that needs to be created, bu instead, it requires some key hyper parameters to segment the data:
+
+\begin{itemize}
+\item eps (epsilon): This parameter defines the maximum distance between two points for them to be considered part of the same neighborhood. A smaller value of eps results in more tightly packed clusters, as only points close to each other are grouped together. On the other hand, a larger eps may merge nearby clusters or include outliers within clusters.
+\item min samples: This parameter specifies the minimum number of points required to form a dense region (core point). A higher value of min samples increases the minimum density required to form a cluster, leading to fewer but more distinct clusters. Smaller values are suitable for detecting smaller, less dense clusters, while larger values are used to focus on more robust, dense areas.
+\end{itemize}
+
+DBSCAN's ability to work with arbitrary cluster shapes and automatically detect outliers makes it particularly suited for this step, as the peripheral region may contain both dense sub-clusters and scattered, low-density points. By carefully tuning eps and min samples, the algorithm can segment the peripheral region into meaningful small clusters while identifying sparse or isolated areas as noise.
+
+The number of clusters created in this step will directly impact the size of the buffer (if allowed in the environment configuration) allocated for the solution. More considerations about the buffer logic will be raised at later sections.
+
+\subsubsection{(Offline - Task 4) Denser points are sequenced based on their proximity, and a base route will be created: from central region to all denser points in the peripheral region}
+
+The very last step of the offline phase is to create an intelligent route, starting from the center region and passing through all the denser points in the peripheral area, known as base route. 
+
+This is performed in two steps. The first step consists in identifying the centroid of each region (center and denser regions in the peripheral area). Once these centroids are identified, the second step is to run a VRP solution to find the best path to pass through each point with the shortest distance. Figure 2 presents an example of a peripheral region and its, sequenced, denser points (base route). This base route will be used to release the buffer size allocated for the solution. More considerations about the buffer logic will be raised at later sections. 
+
+\subsubsection{(Online - Task 1) Pre-allocate one vehicle per cluster and density region}
+
+In the online phase of the proposed method, the very first step is to pre-allocate the fleet of vehicles. This is considered the initial setup of the online environment in order to start processing/delivering parcels. It will be pre-allocated one vehicle for the center region and multiple other vehicles for the denser points in the peripheral area (one vehicle per denser point previously identified). This pre-allocation is performed per macro region. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-3}
+  \caption{Example of pre-allocation of a fleet of vehicles in a given macro region}
+\end{figure}
+
+Figure 3 is a representation of the pre-allocation of the fleet of vehicles in a given macro region. In this example, the fleet of vehicles for one of the macro regions is composed of four units: one for the center region and three other units for the denser points in the peripheral area. 
+
+\subsubsection{(Online - Task 2.b) Predict the density region within the predicted macro region}
+
+At this point, the initial setup of the online phase is completed, in other words, the fleet of vehicles was pre-allocated to deliver packages on strategic locations. These locations were pre-defined based on historical deliveries, but now is time to process/deliver new packages. 
+
+When a new package arrives in the warehouse, it will be assigned to a macro region. This is done by using the address attributes (latitude and longitude) and finding the associated location. This process is performed in both baseline and proposed methods of this research, and it is considered a base segmentation (pre-processing) for the route optimization process. 
+
+However, in this research, we also proposed a density segmentation within the macro region. In this step, the new package will be assigned to its density region, too. The density regions were created using two techniques: center region was defined by estimating the kernel density of the region \cite{Moura}, and peripheral denser points were defined by clustering the peripheral area via DBSCAN. 
+
+Furthermore, in order to assign a density region to the new package (where latitude and longitude is the input data), the following steps are executed: 1) Use the pre-trained parameters of the KDE to find the number of contours associated with the new package; 2)
+If the number of contours is equal or greater than the threshold associated with the center region, then flag the density region as center; 3) If the number of contours is not equal or greater than the threshold associated with the center region, then predict the closest density cluster (of the peripheral area) associated with the new package; 4) Flag the density region as the closest denser point. 
+
+\subsubsection{(Online - Task 3.a) Reorganize pre-allocated vehicles as per the base route - buffer}
+
+At this point of the process, all customer requests (parcels) have been pre-allocated in one of the remaining vehicles. However, the remaining pre-allocated vehicles are partially loaded, meaning that it would be possible to load more customer requests into these vehicles.  
+This current state of the business process can be validated in the sequence of steps of the proposed method, more specifically, under the following condition: whenever it is not possible to load a vehicle with new parcels, due to its capacity limitation, the vehicle will be closed, and its travel plan is created.
+
+However, in order to maximize vehicle loading, this step of the process aims to reorganize the fleet of remaining vehicles, by using their maximum capacity (and so, eventually, reducing the number of vehicles to complete the operation). 
+This reorganization of vehicle loading is driven by the base route, which aims to specify the logical order of each density region, based on their proximity. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-4}
+  \caption{Reorganization of the remaining fleet of vehicles}
+\end{figure}
+
+In Figure 4, there is an example where the delivery process ends up with four vehicles, partially loaded. After the reorganization of the remaining packages, only two vehicles are necessary to deliver the rest of the parcels. 
+
+Technically, the list of reorganized parcels is considered a buffer, since reassignment of customers' demands is not allowed in SD-VRP solutions. The example given by Figure 4, contains a buffer size of 30 packages (the number of packages reassigned to another vehicle). In order to minimize the buffer size, vehicles with a higher number of pre-allocated parcels are prioritized. 
+
+The only hyperparameter to calibrate the buffer size is the number of density regions, which is given by the number of clusters in the peripheral area. The more density regions are created, the bigger will be the buffer size (since reassignments will be more frequent). This is the downside of having several density regions. On the other hand, several density regions tend to provide more dense routes.
+
+\section{Results}
+
+The proposed method consistently reduces transportation costs by optimizing travel distances, achieving a median cost reduction of 7.13\% compared to the baseline. This improvement demonstrates the value of incorporating density-based segmentation into VRP solutions. 
+The following sections provide more information about these findings. 
+
+\subsection{Evaluation framework}
+
+The proposed method was evaluated by analyzing its performance (measured in travel distance) across multiple macro region configurations (k), and comparing results to a baseline approach. Below is an outline of the evaluation framework:
+
+\begin{itemize}
+\item Methods under comparison:
+    \begin{itemize}
+        \item Baseline: Traditional route optimization methods using only macro regions for Vehicle Routing Problem (VRP) solutions \cite{Loggi}.
+        \item Proposed method: Introduces macro region segmentation based on density before generating VRP solutions.
+    \end{itemize}
+\item Completeness criteria:
+    \begin{itemize}
+        \item All the parcels under evaluation needs to be flagged as delivered.
+        \item Vehicle allocation needs to meet a capacity constraint (maximum vehicle capacity).
+    \end{itemize}
+\item Evaluation metric
+    \begin{itemize}
+        \item Travel distance (measured in km), which means the total travel distance required to deliver all parcels (equal to the cumulative travel distance of the fleet).
+    \end{itemize}
+\item Scenario configurations:
+    \begin{itemize}
+        \item Experiments were conducted using “k” macro regions, where “k” is the number of regions created.
+        \item The baseline method uses macro regions generated by a K-Means clustering algorithm.
+    \end{itemize}
+\item Reporting results:
+    \begin{itemize}
+        \item Comparisons between the baseline and proposed methods were reported for each scenario configuration.
+        \item Loggi Benchmark for Urban Deliveries, LoggiBUD \cite{Loggi}, is used to provide real-world datasets and baseline algorithms and validations.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Evaluation metric and results}
+
+After executing the evaluation framework, preliminary results have shown a consistent transport cost reduction, as presented in Figure 5. The median cost reduction was around 7.13\% (measured by travel distance). In summary, by comparing the proposed method against traditional VRP solutions, we could consistently deliver the same amount of parcels in smaller travel distances.   
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-5}
+  \caption{Percentage of cost reduction with the proposed method}
+\end{figure}
+
+The results presented in Figure 5 were extracted after applying the evaluation framework previously described, where the baseline and proposed methods were executed multiple times, varying the number of macro regions under testing. Table \ref{tab2} provides the underlying data used to create the visualization from Figure 5. 
+
+\begin{table}
+  \caption{Cost reductions by macro region configurations}
+  \label{tab2}
+  \begin{tabular}{ccl}
+    \toprule
+    Number of Macro Regions (k)&Cost Reduction (\%)\\
+    \midrule
+    1 & 24.15\%\\
+    2 & 3.58\%\\
+    3 & 8.34\%\\
+    4 & 5.85\%\\
+    5 & 7.13\%\\
+    Median & 7.13\%\\
+    
+  \bottomrule
+\end{tabular}
+\end{table}
+
+The best way to interpret Table \ref{tab2} is: when the VRP environment is set to k number of macro regions, the proposed method performs x\% better than the baseline method. For example,  when the VRP environment is set to 1 macro region, the proposed method performs 24.15\% better than the baseline method; or when the VRP environment is set to 2 macro regions, the proposed method performs 3.58\% better than the baseline method. 
+
+To reduce bias, we reported the median percentage of cost reduction after testing the proposed method across various macro region configurations. The ultimate analysis suggests that the proposed method may result in transportation cost reductions around 7.13\%, when compared with traditional approaches of VRP solution, where there is no further segmentation of the delivery region. 
+
+It is worth highlighting that the delivery region, per se, is actually an initial attempt to segment the geographic region. This initial segmentation is referred to in this work as the macro regions, and can be done either manually or by clustering algorithms (such as K-Means).
+
+The proposed method introduces an additional segmentation step within macro regions, independent of how these regions were initially created. This additional segmentation is supported by three hyperparameters: (1) kde threshold, a custom parameter to specify the size of the center region; (2) eps, a DBSCAN parameter that defines the maximum distance between two points for them to be considered part of the same neighborhood and; (3) min samples, a DBSCAN parameter that specifies the minimum number of points required to form a dense region (core point).
+
+\subsection{Alternative techniques assessed for peripheral area segmentation}
+
+As mentioned in this work, \cite{Moura} has explored the idea of mapping and extracting the central areas of customer demands in urban logistics, so that the central and peripheral regions could be used to set the route planning region boundaries. However, the peripheral areas are often quite sparse, and the lack of knowledge of density in that region increases the complexity of optimization of VRP solutions. Ultimately, this results in more zigzags or sparse routes.
+
+We proposed a solid approach in this work to overcome the sparsity issue in peripheral regions, by using DBSCAN to map local density and use these areas as temporary buffering for the route planning. However, we also tested another approach using polar segments. 
+
+The alternative to use of polar segmentation in our approach aligns with recent advances in clustering algorithms that explore polar coordinate systems to improve spatial structuring. For example, in \cite{Li2022-March} it was proposed the Fast Density Peaks Clustering algorithm in Polar Coordinate System (PC-DPC), which transforms data into polar coordinates to reduce computational complexity and improve clustering efficiency while preserving accuracy. Although PC-DPC was not applied specifically to urban logistics, its core idea reinforces the value of leveraging angular and radial patterns to structure spatial data more effectively. In the context of last-mile delivery, this supports business scenarios where the fleet allocation must follow controlled clustering rules (as opposed to our original method with DBSCAN, where clustering are purely based on density).
+
+In this alternative approach, the peripheral region was clustered into adaptive polar angular segments centered around the centroid of the central region. The idea was to divide the peripheral area into directional zones, where each segment captures deliveries that lie within a specific angular range relative to the center.
+
+Unlike fixed-angle segmentation, adaptive polar clustering adapted the angular width of each segment based on the spatial density of delivery points, allowing denser areas to form narrower, more refined clusters and sparser areas to form broader ones. Figure 6 provides an abstraction behind the idea of polar clustering for last-mile deliveries.
+
+This segmentation allows the algorithm to exploit the natural spatial orientation of the city, grouping deliveries that are geographically aligned, and ultimately allowing more coherent and less overlapping vehicle routes. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{fig-7}
+  \caption{Adaptive polar segments for last mile delivery}
+\end{figure}
+
+Table \ref{tab3} presents our results after challenging the baseline algorithm with adaptive polar clustering. This alternative was also able to reduce transportation costs, but did not perform as good as the main method proposed in this research. That is explainable because, in low-density peripheral zones, this method may group far-apart deliveries into the same cluster, just because they're in the same radial sector.
+
+\begin{table}
+  \caption{Cost reductions with adaptive polar clustering}
+  \label{tab3}
+  \begin{tabular}{ccl}
+    \toprule
+    Number of Macro Regions (k)&Cost Reduction (\%)\\
+    \midrule
+    1 & 0.98\%\\
+    2 & 0.86\%\\
+    3 & 0.44\%\\
+    4 & 2.42\%\\
+    5 & 0.98\%\\
+    Median & 0.98\%\\
+    
+  \bottomrule
+\end{tabular}
+\end{table}
+
+In addition, DBSCAN adapts the shape and size of the cluster to the local density. Some peripheral areas may have only a few deliveries that are best grouped together for a short trip. Adaptive polar clustering might force a full sector of deliveries into one route, even if it includes isolated outliers, increasing the total length of the route.
+On the other hand, adaptive polar segments may be suitable when there is a need to strict control over number and size of clusters due to fleet constraints.
+
+\section{Conclusions and future work}
+
+In the next sections, we present our conclusions and future work. The main contributions of this work relate to the creation of a more realistic business abstraction of logistics operations, with the ultimate goal of reducing the optimization space of VRP solutions and reducing transportation costs. In terms of future work, the main directions of research are related to a more complete mapping of extreme business conditions and constraints.
+
+\subsection{Conclusions}
+
+The integration of KDE and density-based clustering in a multi layered density mapping analysis, can result in substantial enhancements of the optimization spaces of VRP solutions. More specifically, the approximation of real-world scenarios of urban logistics, by creating an abstraction of center and peripheral areas, helps to overcome some limitations of purely clustering segmentation (for instance, over segmentation or unrealistic business operations).
+
+KDE provides a continuous estimation of delivery density across a macro region, effectively identifying central and peripheral areas. Central regions can be prioritized for high-frequency deliveries, while peripheral regions can be analyzed separately for optimal resource allocation. After KDE identifies peripheral areas, clustering algorithms can be applied within these specific regions to identify denser points that serve as local hubs for delivery. This layered approach ensures that clusters within peripheral areas are more compact and meaningful, facilitating more efficient route planning.
+
+In addition to the approximation of real-world scenarios of urban logistics, 
+by segmenting macro regions, the proposed method reduces the computational complexity of VRP solvers. Instead of optimizing across a larger macro region, the solver operates on smaller and homogeneous micro regions, leading to faster and more cost-effective solutions.
+
+Finally, by applying a clustering algorithm after KDE, we can fine tune its hyperparameters for the specific density range of the peripheral areas. This approach reduces the sensitivity issue of clustering algorithms, as the clustering occurs within well-defined regions instead of the entire macro region.
+
+\subsection{Future work}
+
+While the proposed method demonstrates significant advantages over traditional segmentation approaches, it also has some limitations. More specifically, its performance can be degraded in extremely dense or sparse regions, and it requires careful parameter tuning.
+
+Extremely dense macro regions, at the limit, can result in non-identification of peripheral areas, since all customer demands are concentrated at the same place. On the other hand, extremely sparse macro regions, at the limit, may result in the non-identification of central areas, since all customer demands are equally spread across the macro region. In this case, the proposed method could not continue to the clustering segmentation phase, and the VRP solver would need to operate in the full macro region.
+
+Future work could explore automatic ways to set such unexpected business conditions and propose other approaches to segment the area, for example, using the global grid indexing system H3 cells \cite{Cheng}, or even the polar clustering coordinates approach to support our density-based method.
+
+Addressing parameter tuning is another space for future work. A subject matter expert needs to setup the hyperparameters of the proposed method in a such way that the operational plan can be executed. For instance, the definition of a central area needs to be meaninful to the logistics operation. Another challenge is the over segmentation of the peripheral areas, resulting in significantly increase of operational complexity.
+Future work could explore combining the proposed method with rule-based constraints. For example, (a) polylines specifying the boundaries of central regions; and (b) the maximum allowed number of peripheral areas.
+
+\backmatter
+
+\bmhead{Acknowledgements}
+
+This work has been supported by FCT – Fundação para a Ciência e
+Tecnologia within the RD Units Project Scope: UIDB/00319/2020.
+
+\bmhead{Data availability}
+All datasets used in this work are public available at Loggi Benchmark for Urban Deliveries (LoggiBUD), https://github.com/loggi/loggibud
+
+\section*{Declarations}
+
+\textbf{Conflict of interest:} The authors declare no competing interests.
+
+%%===================================================%%
+%% For presentation purpose, we have included        %%
+%% \bigskip command. Please ignore this.             %%
+%%===================================================%%
+\bigskip
+\begin{flushleft}%
+
+\end{flushleft}
+
+\begin{appendices}
+
+%%=============================================%%
+%% For submissions to Nature Portfolio Journals %%
+%% please use the heading ``Extended Data''.   %%
+%%=============================================%%
+
+%%=============================================================%%
+%% Sample for another appendix section			       %%
+%%=============================================================%%
+
+%% \section{Example of another appendix section}\label{secA2}%
+%% Appendices may be used for helpful, supporting or essential material that would otherwise 
+%% clutter, break up or be distracting to the text. Appendices can consist of sections, figures, 
+%% tables and equations etc.
+
+\end{appendices}
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+\bibliography{sn-bibliography}% common bib file
+%% if required, the content of .bbl file can be included here once bbl is generated
+%%\input sn-article.bbl
+
+\end{document}
